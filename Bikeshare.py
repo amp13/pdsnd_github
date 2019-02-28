@@ -14,12 +14,12 @@ DAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'satur
 
 def get_filters():
     """
-    Asks user to specify a city, month, and day to analyze.
+    Asks user to specify a city, month, and weekday_name to analyze.
 
     Returns:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
+        (str) weekday_name - name of the weekday_name of week to filter by, or "all" to apply no weekday_name filter
     """
 
     print('Hello! Let\'s explore some US bikeshare data!')
@@ -40,25 +40,25 @@ def get_filters():
 
     # filter by month to create the new dataframe
 
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
+    # TO DO: get user input for weekday_name of week (all, monday, tuesday, ... sunday)
 
 
-    day = input("For which day of the week?(Or, select ALL)")
+    weekday_name = input("For which weekday_name of the week?(Or, select ALL)")
 
 
     print('-'*40)
-    return city, month, day
+    return city, month, weekday_name
 
-def load_data(city, month, day):
+def load_data(city, month, weekday_name):
     """
-    Loads data for the specified city and filters by month and day if applicable.
+    Loads data for the specified city and filters by month and weekday_name if applicable.
 
     Args:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
+        (str) weekday_name - name of the weekday_name of week to filter by, or "all" to apply no weekday_name filter
     Returns:
-        df - Pandas DataFrame containing city data filtered by month and day
+        df - Pandas DataFrame containing city data filtered by month and weekday_name
     """
 
     df = pd.read_csv(CITY_DATA[city])
@@ -67,9 +67,9 @@ def load_data(city, month, day):
 # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
-# extract month and day of week from Start Time to create new columns
+# extract month and weekday_name of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
-    df['day'] = df['Start Time'].dt.weekday_name
+    df['weekday_name'] = df['Start Time'].dt.weekday_name
     df['hour'] = df['Start Time'].dt.hour
 
     # filter by month if applicable
@@ -80,10 +80,10 @@ def load_data(city, month, day):
     # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
-    # filter by day of week if applicable
-    if day != 'all':
-    # filter by day of week to create the new dataframe
-        df = df[df['day'] == day.title()]
+    # filter by weekday_name of week if applicable
+    if weekday_name != 'all':
+    # filter by weekday_name of week to create the new dataframe
+        df = df[df['weekday_name'] == weekday_name.title()]
 
     return df
 
@@ -97,9 +97,9 @@ def time_stats(df):
     most_common_month = df['month'].value_counts().idxmax()
     print("The most common month", most_common_month)
 
-    # TO DO: display the most common day of week
-    most_common_day = df['day'].value_counts().idxmax()
-    print("The most common day", most_common_day)
+    # TO DO: display the most common weekday_name of week
+    most_common_day = df['weekday_name'].value_counts().idxmax()
+    print("The most common weekday_name", most_common_day)
 
     # TO DO: display the most common start hour
     most_common_hour = df['hour'].value_counts().idxmax()
@@ -178,8 +178,8 @@ def user_stats(df):
 
 def main():
     while True:
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
+        city, month, weekday_name = get_filters()
+        df = load_data(city, month, weekday_name)
 
         time_stats(df)
         station_stats(df)
