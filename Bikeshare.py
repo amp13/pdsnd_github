@@ -34,7 +34,7 @@ def get_filters():
     # TO DO: get user input for month (all, january, february, ... , june)   
 
 
-    month = input("For which month?  (Or select all if you would like all months.)")
+    month = input("Please select a month?  (Or select all if you would like all months.)")
 
     # use the index of the months list to get the corresponding int
 
