@@ -5,7 +5,7 @@ Include the date you created this project and README file.
 Replace the Project Title
 
 ### Description
-Describe what your project is about and what it does
+To create a local and remote repository, make changes to various files, and upload those changes to the remote repository.
 
 ### Files used
 I used the following github link as an aid in completing parts of the Bikeshare project:
